@@ -3,5 +3,14 @@ import WorkflowBoard from './components/WorkflowBoard.vue'
 </script>
 
 <template>
-  <WorkflowBoard />
+  <div class="app-container">
+    <WorkflowBoard />
+  </div>
 </template>
+
+<style scoped>
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+}
+</style>

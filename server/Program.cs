@@ -44,7 +44,19 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<WorkflowDbContext>();
-    db.Database.Migrate();
+    
+    // Only run migrations if using a relational database
+    if (db.Database.IsRelational())
+    {
+        db.Database.Migrate();
+    }
+    else
+    {
+        // For in-memory databases (testing), just ensure created
+        db.Database.EnsureCreated();
+    }
 }
 
 app.Run();
+
+public partial class Program { }

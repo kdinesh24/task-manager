@@ -1,0 +1,33 @@
+# Build results
+bin/
+obj/
+
+# Node.js dependencies (if using npm in server)
+node_modules/
+
+# User-specific files
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Environment files (uncomment if you have secrets)
+# appsettings.*.json
+# !appsettings.json
+# !appsettings.Development.json

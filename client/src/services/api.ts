@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
 
 export interface WorkflowTask {
   id: number;
@@ -57,6 +57,14 @@ export const taskApi = {
       method: 'PUT',
     });
     if (!response.ok) throw new Error('Failed to complete task');
+    return response.json();
+  },
+
+  async uncompleteTask(id: number): Promise<WorkflowTask> {
+    const response = await fetch(`${API_BASE_URL}/tasks/${id}/uncomplete`, {
+      method: 'PUT',
+    });
+    if (!response.ok) throw new Error('Failed to uncomplete task');
     return response.json();
   },
 

@@ -18,17 +18,28 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
-    build: .
-    container_name: workflow-app
+  backend:
+    build:
+      context: ./server
+    container_name: workflow-backend
     ports:
       - "8080:8080"
-      - "8081:8081"
     environment:
       - ConnectionStrings__DefaultConnection=Host=postgres;Database=workflow;Username=postgres;Password=postgres
     depends_on:
       postgres:
         condition: service_healthy
+
+  frontend:
+    build:
+      context: ./client
+    container_name: workflow-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8080/api
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

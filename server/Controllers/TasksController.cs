@@ -137,6 +137,26 @@ public class TasksController : ControllerBase
         return Ok(task);
     }
 
+    // PUT: api/tasks/5/uncomplete
+    [HttpPut("{id}/uncomplete")]
+    public async Task<IActionResult> UncompleteTask(int id)
+    {
+        var task = await _context.Tasks.FindAsync(id);
+
+        if (task == null)
+        {
+            return NotFound();
+        }
+
+        task.IsCompleted = false;
+        task.Status = "pending";
+        task.CompletedAt = null;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(task);
+    }
+
     // DELETE: api/tasks/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTask(int id)
